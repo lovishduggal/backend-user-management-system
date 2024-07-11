@@ -69,7 +69,7 @@ const getAllUsers = async (req, res, next) => {
         : {};
 
     // Calculate the skip value based on the currentPage and perPage
-    const skip = (parsedCurrentPage - 1) * parsedCurrentPage;
+    const skip = (parsedCurrentPage - 1) * parsedPerPage;
 
     try {
         // Find users based on the query, apply pagination, and sort them by _id in descending order, and get the total count
