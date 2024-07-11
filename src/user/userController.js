@@ -35,4 +35,13 @@ const createUser = async (req, res, next) => {
     }
 };
 
-export { createUser };
+const getAllUsers = async (req, res, next) => {
+    try {
+        const users = await userModal.find();
+        return res.status(200).json({ data: users });
+    } catch (error) {
+        return next(error);
+    }
+};
+
+export { createUser, getAllUsers };
