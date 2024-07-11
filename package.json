@@ -1,0 +1,11 @@
+{
+  "name": "backend-user-management-system",
+  "version": "1.0.0",
+  "description": "Backend of User Management System",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node src/server.js"
+  },
+  "author": "Lovish Duggal <lovishduggal11@gmail.com>",
+  "license": "ISC"
+}
