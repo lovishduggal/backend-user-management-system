@@ -1,5 +1,6 @@
 {
     "name": "backend-user-management-system",
+    "type": "module",
     "version": "1.0.0",
     "description": "Backend of User Management System",
     "main": "index.js",
@@ -27,5 +28,8 @@
             "npm run lint:fix",
             "npm run format:fix"
         ]
+    },
+    "dependencies": {
+        "dotenv": "^16.4.5"
     }
 }
