@@ -42,36 +42,36 @@ const getAllUsers = async (req, res, next) => {
     const parsedCurrentPage = parseInt(currentPage, 10) || 1;
     const parsedPerPage = parseInt(perPage, 10) || 5;
 
-    try {
-        // Check if the search term is valid
-        if (searchTerm && !/^[a-zA-Z0-9]+$/.test(searchTerm)) {
-            const error = createHttpError(400, 'Invalid query');
-            return next(error);
-        }
+    // Check if the search term is valid
+    if (searchTerm && !/^[a-zA-Z0-9]+$/.test(searchTerm)) {
+        const error = createHttpError(400, 'Invalid query');
+        return next(error);
+    }
 
-        // Build the query based on the search term
-        const query = searchTerm
-            ? {
-                  $or: [
-                      {
-                          $expr: {
-                              $regexMatch: {
-                                  input: {
-                                      $concat: ['$firstName', ' ', '$lastName'],
-                                  },
-                                  regex: searchTerm,
-                                  options: 'i',
+    // Build the query based on the search term
+    const query = searchTerm
+        ? {
+              $or: [
+                  {
+                      $expr: {
+                          $regexMatch: {
+                              input: {
+                                  $concat: ['$firstName', ' ', '$lastName'],
                               },
+                              regex: searchTerm,
+                              options: 'i',
                           },
                       },
-                      { email: { $regex: searchTerm, $options: 'i' } },
-                  ],
-              }
-            : {};
+                  },
+                  { email: { $regex: searchTerm, $options: 'i' } },
+              ],
+          }
+        : {};
 
-        // Calculate the skip value based on the currentPage and perPage
-        const skip = (parsedCurrentPage - 1) * parsedCurrentPage;
+    // Calculate the skip value based on the currentPage and perPage
+    const skip = (parsedCurrentPage - 1) * parsedCurrentPage;
 
+    try {
         // Find users based on the query, apply pagination, and sort them by _id in descending order, and get the total count
         const [usersData, totalCountData] = await Promise.allSettled([
             userModal
