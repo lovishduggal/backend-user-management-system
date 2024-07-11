@@ -36,7 +36,11 @@ const createUser = async (req, res, next) => {
 };
 
 const getAllUsers = async (req, res, next) => {
-    const { q: searchTerm } = req.query;
+    const { q: searchTerm, currentPage = 1, perPage = 5 } = req.query;
+
+    // Validate the currentPage and perPage values
+    const parsedCurrentPage = parseInt(currentPage, 10) || 1;
+    const parsedPerPage = parseInt(perPage, 10) || 5;
 
     try {
         // Check if the search term is valid
@@ -65,10 +69,22 @@ const getAllUsers = async (req, res, next) => {
               }
             : {};
 
-        // Find users based on the query and sort them by _id in descending order
-        const users = await userModal.find(query).sort({ _id: -1 });
+        // Calculate the skip value based on the currentPage and perPage
+        const skip = (parsedCurrentPage - 1) * parsedCurrentPage;
 
-        return res.status(200).json({ data: users });
+        // Find users based on the query, apply pagination, and sort them by _id in descending order, and get the total count
+        const [usersData, totalCountData] = await Promise.allSettled([
+            userModal
+                .find(query)
+                .sort({ _id: -1 })
+                .skip(skip)
+                .limit(parsedPerPage),
+            userModal.countDocuments(),
+        ]);
+
+        return res
+            .status(200)
+            .json({ data: usersData.value, totalCount: totalCountData.value });
     } catch (error) {
         return next(error);
     }
