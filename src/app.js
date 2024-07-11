@@ -1,8 +1,11 @@
 import express from 'express';
+import globalErrorHandler from './middlewares/globalErrorHandler.js';
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('Welcome to Backend of User Management System!');
+    return res.send('<h1>Welcome to Backend of User Management System!</h1>');
 });
 
+// Global Error Handler
+app.use(globalErrorHandler);
 export default app;
