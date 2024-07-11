@@ -8,7 +8,8 @@ import { Config } from '../config/index.js';
  * @param {Object} res - The response object.
  * @returns {Object} - The response object with the error status and message.
  */
-const globalErrorHandler = (err, req, res) => {
+// eslint-disable-next-line no-unused-vars
+const globalErrorHandler = (err, req, res, next) => {
     const statusCode = err.statusCode || 500;
     const message = err.message || 'Internal Server Error';
     return res.status(statusCode).json({
