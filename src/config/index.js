@@ -1,9 +1,11 @@
+/* eslint-disable no-undef */
 import { config } from 'dotenv';
 config();
 
-// eslint-disable-next-line no-undef
-const { PORT } = process.env;
+const { PORT, NODE_ENV, MONGO_CONNECTION_STRING } = process.env;
 
 export const Config = {
     PORT,
+    env: NODE_ENV,
+    dbUrl: MONGO_CONNECTION_STRING,
 };

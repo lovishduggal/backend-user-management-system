@@ -5,7 +5,7 @@
     "description": "Backend of User Management System",
     "main": "index.js",
     "scripts": {
-        "dev": "node src/server.js",
+        "dev": "nodemon src/server.js",
         "format:check": "prettier . --check",
         "format:fix": "prettier . --write",
         "lint": "eslint .",
@@ -30,6 +30,9 @@
         ]
     },
     "dependencies": {
-        "dotenv": "^16.4.5"
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "http-errors": "^2.0.0",
+        "mongoose": "^8.5.0"
     }
 }
