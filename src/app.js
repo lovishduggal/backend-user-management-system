@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     return res.send('<h1>Welcome to Backend of User Management System!</h1>');
 });
 
-app.use('/api/user', userRouter);
+app.use('/user', userRouter);
 
 // Global Error Handler
 app.use(globalErrorHandler);
