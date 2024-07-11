@@ -1,11 +1,16 @@
 {
-  "name": "backend-user-management-system",
-  "version": "1.0.0",
-  "description": "Backend of User Management System",
-  "main": "index.js",
-  "scripts": {
-    "dev": "node src/server.js"
-  },
-  "author": "Lovish Duggal <lovishduggal11@gmail.com>",
-  "license": "ISC"
+    "name": "backend-user-management-system",
+    "version": "1.0.0",
+    "description": "Backend of User Management System",
+    "main": "index.js",
+    "scripts": {
+        "dev": "node src/server.js",
+        "format:check": "prettier . --check",
+        "format:fix": "prettier . --write"
+    },
+    "author": "Lovish Duggal <lovishduggal11@gmail.com>",
+    "license": "ISC",
+    "devDependencies": {
+        "prettier": "3.3.2"
+    }
 }
