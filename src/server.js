@@ -1,4 +1,4 @@
 function login(username) {
-    console.log(username);
+    return username;
 }
 login('John Doe');
