@@ -56,7 +56,7 @@ const getAllUsers = async (req, res, next) => {
                       $expr: {
                           $regexMatch: {
                               input: {
-                                  $concat: ['$firstName', ' ', '$lastName'],
+                                  $concat: ['$firstName', '$lastName'],
                               },
                               regex: searchTerm,
                               options: 'i',
@@ -79,7 +79,7 @@ const getAllUsers = async (req, res, next) => {
                 .sort({ _id: -1 })
                 .skip(skip)
                 .limit(parsedPerPage),
-            userModal.countDocuments(),
+            userModal.countDocuments(query),
         ]);
 
         return res
